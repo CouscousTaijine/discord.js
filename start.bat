@@ -21,7 +21,7 @@ if not exist "config.json" (
   copy "config.example.json" "config.json" >nul
   echo.
   echo Le fichier config.json vient d'etre cree.
-  echo Remplis DISCORD_TOKEN, CLIENT_ID et GUILD_ID dans le Bloc-notes.
+  echo Remplis DISCORD_TOKEN et CLIENT_ID. GUILD_ID est facultatif.
   start /wait "" notepad "config.json"
 )
 
