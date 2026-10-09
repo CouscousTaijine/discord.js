@@ -1,50 +1,49 @@
 # NEBULA — Discord bot 🌌
 
-A modular Discord.js bot with local-first text AI, image generation, music playback, moderation, utilities and fun commands.
+A modular Discord.js bot with local-first text AI, image generation, optional music, moderation and utilities.
 
-## Fast setup
+## Windows: easiest launch
 
-**Windows:** double-click `setup/install.bat`.  
-**Linux/macOS:** run `bash setup/install.sh`.  
-**Any platform:** run `npm run setup` (or `node setup/install.js`).
+1. Install Node.js 20 or newer: https://nodejs.org/
+2. Download the repository and extract it.
+3. Double-click **`start.bat`** at the root.
+4. On first launch it creates `config.json` and opens it in Notepad.
+5. Fill in `DISCORD_TOKEN`, `CLIENT_ID`, and `GUILD_ID`, save and close Notepad.
+6. The launcher installs npm packages if needed, registers slash commands, and starts the bot.
 
-The interactive installer lets you choose:
-1. Base Discord bot only.
-2. Base bot + voice music packages.
-3. All supported npm modules (base + music).
-4. Base bot without music.
+You can edit `config.json` at any time. Do not publish it: it contains your private bot token and is ignored by Git.
 
-It installs only the selected npm dependencies and creates `.env` from `.env.example` without overwriting an existing configuration. Requires Node.js 20+.
+## Manual setup
 
-## Configure and run
+- Copy `config.example.json` to `config.json` and fill in your values, or use `.env`.
+- Install dependencies with `npm install`.
+- Register commands with `npm run deploy`.
+- Start with `npm start`.
+- Run syntax checks with `npm run check`.
 
-1. Create a bot application at https://discord.com/developers/applications.
-2. Put `DISCORD_TOKEN` and `CLIENT_ID` in your local `.env`. Optional `GUILD_ID` makes test-server command registration immediate.
-3. Register slash commands: `npm run deploy`.
-4. Start: `npm start`.
-5. Syntax check: `npm run check`.
+Configuration keys in `config.json` match their environment-variable names. Existing environment variables take precedence.
 
 ## AI (free local mode)
 
-Install [Ollama](https://ollama.com/) and run `ollama pull qwen2.5:3b`. Configure `OLLAMA_URL=http://127.0.0.1:11434` and `OLLAMA_MODEL=qwen2.5:3b` in `.env`. Local inference does not require a paid AI API, but uses your computer's RAM/CPU (GPU can help). Alternatively configure `AI_BASE_URL`, `AI_API_KEY`, and `AI_MODEL` for an OpenAI-compatible endpoint.
+Install [Ollama](https://ollama.com/) and run `ollama pull qwen2.5:3b`. Keep `OLLAMA_URL=http://127.0.0.1:11434` and `OLLAMA_MODEL=qwen2.5:3b` in config. Local inference uses your computer's RAM/CPU; a GPU can help. Alternatively, configure `AI_BASE_URL`, `AI_API_KEY`, and `AI_MODEL` for an OpenAI-compatible endpoint.
 
 ## Image generation
 
-The `/image` command uses the configurable `IMAGE_API_BASE_URL` community endpoint. Public services may be slow, rate-limited, or change their free access; there is no guarantee of permanent free availability.
+The `/image` command uses the configurable community endpoint in `IMAGE_API_BASE_URL`. Public services may be slow, rate-limited, or change free access; permanent free availability is not guaranteed.
 
 ## Music
 
-Choose the music module in the installer. Install FFmpeg separately and ensure it is on PATH. The bot supports a queue and play/skip/stop/pause/resume/queue/leave controls for YouTube links/search and direct audio links. YouTube extraction may break after upstream changes. Give the bot Connect and Speak permissions. Use only media you have permission to play.
+Music is optional. Run `npm run setup` and select a music option, or install the optional packages `@discordjs/voice` and `play-dl`. Install FFmpeg separately and ensure it is on PATH. The bot supports play/skip/stop/pause/resume/queue/leave for YouTube links/search and direct audio links. YouTube extraction may break after upstream changes. Give the bot Connect and Speak permissions. Use only media you have permission to play.
 
 ## Commands
 
 - AI/images: `/ask`, `/image`
 - Music: `/play`, `/queue`, `/skip`, `/pause`, `/resume`, `/stop`, `/leave`
-- Moderation: `/clear`, `/kick`, `/ban` (permission protected)
+- Moderation: `/clear`, `/kick`, `/ban`
 - Utilities: `/ping`, `/help`, `/server`, `/userinfo`, `/avatar`, `/poll`, `/roll`, `/coinflip`, `/remind`
 
-## Security and honest limitations
+## Security and limitations
 
-Never commit or share `.env` or your bot token. This project does not perform mass-DM, raid, token-grabbing or abusive automation. Voice conversation with speech recognition and speech synthesis is not included yet; music playback is the lightweight voice feature. A bot cannot literally do everything, and Discord rules, model hardware needs, provider quotas and API changes apply.
+Never commit or share `config.json`, `.env`, or your bot token. Voice conversation with speech recognition and speech synthesis is not implemented; music playback is the lightweight voice feature. A bot cannot literally do everything, and Discord permissions, hardware requirements, provider quotas and API changes apply.
 
-This is an initial project implementation. Run it in a private test server first; live Discord, music and provider integration have not been validated by this repository-editing session.
+Live Discord, music and provider integrations still need to be tested in your own private test server.
