@@ -8,8 +8,8 @@ A modular Discord.js bot with local-first text AI, image generation, optional mu
 2. Download the repository and extract it.
 3. Double-click **`start.bat`** at the root.
 4. On first launch it creates `config.json` and opens it in Notepad.
-5. Fill in `DISCORD_TOKEN`, `CLIENT_ID`, and `GUILD_ID`, save and close Notepad.
-6. The launcher installs npm packages if needed, registers slash commands, and starts the bot.
+5. Fill in `DISCORD_TOKEN` and `CLIENT_ID`. `GUILD_ID` is optional but recommended for instant testing in one server.
+6. Save and close Notepad. The launcher installs npm packages if needed, registers slash commands, and starts the bot.
 
 You can edit `config.json` at any time. Do not publish it: it contains your private bot token and is ignored by Git.
 
