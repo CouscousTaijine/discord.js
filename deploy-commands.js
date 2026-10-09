@@ -1,5 +1,5 @@
-require('dotenv').config();
 require('./src/config');
+require('dotenv').config();
 const { REST, Routes } = require('discord.js');
 const { commandData } = require('./src/commands');
 const { DISCORD_TOKEN, CLIENT_ID, GUILD_ID } = process.env;
