@@ -1,37 +1,49 @@
-# NEBULA — Discord bot
+# NEBULA — Discord bot 🌌
 
-A modular, self-hostable Discord bot with local-first AI, image generation, music playback, moderation, utility and fun commands.
+A modular Discord.js bot with local-first text AI, image generation, optional music, moderation and utilities.
 
-## Quick start
+## Windows: easiest launch
 
-1. Install Node.js 20+ and FFmpeg. Install Python 3 and `yt-dlp` for music.
-2. Create a Discord application/bot at https://discord.com/developers/applications and enable the **Message Content Intent** only if you choose to use prefix chat (slash commands are the default).
-3. Copy `.env.example` to `.env`, then fill in `DISCORD_TOKEN` and `CLIENT_ID`. Add `GUILD_ID` for instant test-server command registration.
-4. Install dependencies: `npm install`
-5. Start Ollama locally and pull a small model, e.g. `ollama pull qwen2.5:3b` (optional; the bot runs without AI configured).
-6. Register commands: `npm run deploy`
-7. Run: `npm start`
+1. Install Node.js 20 or newer: https://nodejs.org/
+2. Download the repository and extract it.
+3. Double-click **`start.bat`** at the root.
+4. On first launch it creates `config.json` and opens it in Notepad.
+5. Fill in `DISCORD_TOKEN` and `CLIENT_ID`. `GUILD_ID` is optional but recommended for instant testing in one server.
+6. Save and close Notepad. The launcher installs npm packages if needed, registers slash commands, and starts the bot.
 
-## Features
+You can edit `config.json` at any time. Do not publish it: it contains your private bot token and is ignored by Git.
 
-- Slash commands for help, ping, server/user info, avatar, polls, reminders, coin flip, dice, and moderation.
-- Local-first text AI through Ollama; optional OpenAI-compatible endpoint support.
-- Image generation through a configurable free/community endpoint (availability and limits depend on provider).
-- Voice music queue for YouTube URLs/search and direct audio URLs, with play/skip/stop/pause/resume/queue/volume.
-- Per-guild configuration, permission checks, rate limits, safe error handling and structured logging.
+## Manual setup
 
-## AI and image generation
+- Copy `config.example.json` to `config.json` and fill in your values, or use `.env`.
+- Install dependencies with `npm install`.
+- Register commands with `npm run deploy`.
+- Start with `npm start`.
+- Run syntax checks with `npm run check`.
 
-Set `OLLAMA_URL=http://127.0.0.1:11434` and `OLLAMA_MODEL=qwen2.5:3b` for local inference. No paid AI API is required for this mode, but it uses your machine's CPU/RAM (GPU helps). For a remote OpenAI-compatible service, set `AI_BASE_URL`, `AI_API_KEY`, and `AI_MODEL`. Image generation uses `IMAGE_API_BASE_URL` and is optional; public free services can change policies, rate limits, and availability at any time.
+Configuration keys in `config.json` match their environment-variable names. Existing environment variables take precedence.
 
-## Music notes
+## AI (free local mode)
 
-Install FFmpeg and `yt-dlp` separately and ensure both are on PATH. Use only media you have permission to play. YouTube extraction can break when YouTube changes; update yt-dlp if playback fails. Discord voice needs the bot to have Connect and Speak permissions.
+Install [Ollama](https://ollama.com/) and run `ollama pull qwen2.5:3b`. Keep `OLLAMA_URL=http://127.0.0.1:11434` and `OLLAMA_MODEL=qwen2.5:3b` in config. Local inference uses your computer's RAM/CPU; a GPU can help. Alternatively, configure `AI_BASE_URL`, `AI_API_KEY`, and `AI_MODEL` for an OpenAI-compatible endpoint.
 
-## Security
+## Image generation
 
-Never commit `.env` or share your bot token. Use Discord role/permission checks for moderation. This project intentionally avoids mass-DM, raid, token-grabbing, and other abusive automation.
+The `/image` command uses the configurable community endpoint in `IMAGE_API_BASE_URL`. Public services may be slow, rate-limited, or change free access; permanent free availability is not guaranteed.
 
-## Limitations
+## Music
 
-A bot cannot literally do everything, and Discord/platform rules, API quotas, hosting resources, model size and provider terms apply. Voice conversation with speech recognition + speech synthesis is not enabled by default; music playback is included as the lightweight voice feature.
+Music is optional. Run `npm run setup` and select a music option, or install the optional packages `@discordjs/voice` and `play-dl`. Install FFmpeg separately and ensure it is on PATH. The bot supports play/skip/stop/pause/resume/queue/leave for YouTube links/search and direct audio links. YouTube extraction may break after upstream changes. Give the bot Connect and Speak permissions. Use only media you have permission to play.
+
+## Commands
+
+- AI/images: `/ask`, `/image`
+- Music: `/play`, `/queue`, `/skip`, `/pause`, `/resume`, `/stop`, `/leave`
+- Moderation: `/clear`, `/kick`, `/ban`
+- Utilities: `/ping`, `/help`, `/server`, `/userinfo`, `/avatar`, `/poll`, `/roll`, `/coinflip`, `/remind`
+
+## Security and limitations
+
+Never commit or share `config.json`, `.env`, or your bot token. Voice conversation with speech recognition and speech synthesis is not implemented; music playback is the lightweight voice feature. A bot cannot literally do everything, and Discord permissions, hardware requirements, provider quotas and API changes apply.
+
+Live Discord, music and provider integrations still need to be tested in your own private test server.
