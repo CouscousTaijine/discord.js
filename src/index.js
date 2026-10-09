@@ -1,5 +1,5 @@
-require('dotenv').config();
 require('./config');
+require('dotenv').config();
 const { Client, GatewayIntentBits, Events } = require('discord.js');
 const { handle } = require('./commands');
 if (!process.env.DISCORD_TOKEN) { console.error('Missing DISCORD_TOKEN. Fill config.json or copy .env.example to .env.'); process.exit(1); }
